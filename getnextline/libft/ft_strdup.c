@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_clear_tree.c                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/16 19:41:29 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/16 19:41:30 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/24 18:52:43 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/11/24 22:36:42 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	<libft.h>
 
-void	tr_clear_tree(t_node **tree)
+char	*ft_strdup(const char *s1)
 {
-	t_node		*tmp_tree;
+	char	*cpy;
+	int		str_size;
 
-	tmp_tree = *tree;
-	if (! tree)
-		return ;
-	if (tmp_tree->left)
-		tr_clear_tree(&tmp_tree->left);
-	free(tmp_tree);
-	if (tmp_tree->right)
-		tr_clear_tree(&tmp_tree->right);
-	*tree = NULL;
+	str_size = ft_strlen(s1);
+	cpy = (char *)malloc(sizeof(char) * str_size + 1);
+	if (cpy != NULL)
+	{
+		ft_strcpy(cpy, s1);
+		return (cpy);
+	}
+	else
+		return (0);
 }

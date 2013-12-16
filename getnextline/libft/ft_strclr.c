@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_clear_tree.c                                    :+:      :+:    :+:   */
+/*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/16 19:41:29 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/16 19:41:30 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/25 15:29:34 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/01 19:35:11 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	<libft.h>
 
-void	tr_clear_tree(t_node **tree)
+void	ft_strclr(char *s)
 {
-	t_node		*tmp_tree;
+	size_t		i;
 
-	tmp_tree = *tree;
-	if (! tree)
-		return ;
-	if (tmp_tree->left)
-		tr_clear_tree(&tmp_tree->left);
-	free(tmp_tree);
-	if (tmp_tree->right)
-		tr_clear_tree(&tmp_tree->right);
-	*tree = NULL;
+	i = 0;
+	if (s)
+	{
+		while (s[i])
+		{
+			s[i] = '\0';
+			i++;
+		}
+	}
+	return ;
 }

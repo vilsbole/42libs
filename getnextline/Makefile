@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2013/12/16 19:38:04 by evilsbol          #+#    #+#              #
-#    Updated: 2013/12/16 19:38:06 by evilsbol         ###   ########.fr        #
+#    Created: 2013/12/09 14:39:48 by evilsbol          #+#    #+#              #
+#    Updated: 2013/12/09 16:40:56 by evilsbol         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,63 +18,48 @@ ARFLAGS = -cvq
 RM = rm
 RMFLAGS = -rf
 
-NAME = libtr.a
-SRCS += $(SRC2)
+NAME = get_next_line
+SRCS = get_next_line.c test.c
 OBJS = $(SRCS:.c=.o)
 
+
 # PERSONNAL VARIABLES
-LPATH = -L./includes
-LIBS = -ltr
-HPATH = -I./includes
-HEADERS = libtr.h
+LPATH = -Llibft
+LIBS = -lft
+HPATH = -Ilibft/includes
+HEADERS = get_next_line.h
 
-TEST = main.c
-EXEC = a.out
+EXEC = test_gnl
 NOW := $(shell date +"%c" | tr ' :' '_')
-
-# Libtr Part I
-SRCS = 	tr_add_node.c tr_clear_tree.c tr_print_reverse_tree.c \
-		tr_new_node.c tr_print_tree.c tr_search_node.c \
-		tr_max_depth.c
-# Libtr Part II
-SRC2 = 	
 
 # START RULES
 .PHONY: depend clean fclean re build run save
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@$(AR) $(ARFLAGS) $@ $^
-	@ranlib $@
-	@echo $(NAME) built
+$(NAME):
+	$(CC) $(CFLAGS) $(HPATH) -c $(SRCS)
+	$(CC) $(CFLAGS) $(LPATH) $(LIBS) $(OBJS) -o $(EXEC)
+	gcc -o test_gnl get_next_line.o test.o -L libft/ -lft
+
+lib:
+	make -C libft/ fclean
+	make -C libft
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $^ $(HPATH)
 
 clean:
-	@$(RM) $(RMFLAGS) $(OBJS)
-	@echo object files removed
+	@rm -rf $(OBJS)
 
 fclean: clean
+	@make -C libft/ fclean
 	@$(RM) $(RMFLAGS) $(NAME) $(EXEC)
 	@echo archive and executable files removed
 
 re: fclean
 	@make all
 
-# Personnal rules
-save:
-	@git add --all
-	@git commit -m 'saving $(NOW)'
-	@echo all files added and commited
-
-$(TEST): $(NAME)
-	@$(CC) $(CFLAGS) $(TEST) $(NAME) $(HPATH) -o $(EXEC)
-
 run:
-	@echo "\033[32mSTART TEST\n"
-	@make $(TEST) && ./$(EXEC)
-	@echo "\033[32m\nEND TEST"
-
-# DO NOT DELETE THIS LINE -- make depends on it
+	@make all
+	@./test_gnl cmp.txt

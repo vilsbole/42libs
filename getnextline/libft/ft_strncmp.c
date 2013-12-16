@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_clear_tree.c                                    :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/16 19:41:29 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/16 19:41:30 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/24 18:57:42 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/02 21:47:16 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	<libft.h>
 
-void	tr_clear_tree(t_node **tree)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_node		*tmp_tree;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-	tmp_tree = *tree;
-	if (! tree)
-		return ;
-	if (tmp_tree->left)
-		tr_clear_tree(&tmp_tree->left);
-	free(tmp_tree);
-	if (tmp_tree->right)
-		tr_clear_tree(&tmp_tree->right);
-	*tree = NULL;
+	str1 = (unsigned char *) s1;
+	str2 = (unsigned char *) s2;
+	while (n--)
+	{
+		if (*str1 != *str2)
+			return (*str1 - *str2);
+		if (!*str1)
+			break ;
+		str1++;
+		str2++;
+	}
+	return (0);
 }

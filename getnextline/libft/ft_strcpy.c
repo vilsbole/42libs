@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_clear_tree.c                                    :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/16 19:41:29 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/16 19:41:30 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/24 18:50:53 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/11/24 22:22:35 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	<libft.h>
 
-void	tr_clear_tree(t_node **tree)
+char	*ft_strcpy(char *s1, const char *s2)
 {
-	t_node		*tmp_tree;
+	size_t	i;
 
-	tmp_tree = *tree;
-	if (! tree)
-		return ;
-	if (tmp_tree->left)
-		tr_clear_tree(&tmp_tree->left);
-	free(tmp_tree);
-	if (tmp_tree->right)
-		tr_clear_tree(&tmp_tree->right);
-	*tree = NULL;
+	i = 0;
+	while (s1 && s2 && s2[i])
+	{
+		s1[i] = s2[i];
+		i ++;
+	}
+	s1[i] = '\0';
+	return (s1);
 }

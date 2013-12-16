@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_clear_tree.c                                    :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/16 19:41:29 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/16 19:41:30 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/29 19:24:48 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/11/29 19:38:58 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	<libft.h>
 
-void	tr_clear_tree(t_node **tree)
+char	*ft_strmap(const char *s, char (*f)(char))
 {
-	t_node		*tmp_tree;
+	size_t		i;
+	size_t		len;
+	char		*str;
 
-	tmp_tree = *tree;
-	if (! tree)
-		return ;
-	if (tmp_tree->left)
-		tr_clear_tree(&tmp_tree->left);
-	free(tmp_tree);
-	if (tmp_tree->right)
-		tr_clear_tree(&tmp_tree->right);
-	*tree = NULL;
+	if (s && f)
+	{
+		len = ft_strlen(s);
+		str = ft_memalloc(len);
+		i = 0;
+		while (i < len && s[i])
+		{
+			str[i] = f(s[i]);
+			i ++;
+		}
+		str[i] = '\0';
+		return (str);
+	}
+	return (NULL);
 }

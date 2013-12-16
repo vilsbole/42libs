@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_clear_tree.c                                    :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/16 19:41:29 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/16 19:41:30 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/24 17:01:49 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/11/27 18:19:52 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	<libft.h>
 
-void	tr_clear_tree(t_node **tree)
+char	*ft_strcat(char *s1, const char *s2)
 {
-	t_node		*tmp_tree;
+	size_t	i1;
+	size_t	i2;
+	size_t	len1;
+	size_t	len2;
 
-	tmp_tree = *tree;
-	if (! tree)
-		return ;
-	if (tmp_tree->left)
-		tr_clear_tree(&tmp_tree->left);
-	free(tmp_tree);
-	if (tmp_tree->right)
-		tr_clear_tree(&tmp_tree->right);
-	*tree = NULL;
+	if (s1 == NULL || s2 == NULL)
+		return (0);
+	len1 = ft_strlen(s1);
+	len2 = len1 + ft_strlen(s2);
+	i1 = 0;
+	i2 = ft_strlen(s1);
+	while (i2 < len2)
+	{
+		s1[i2] = ((char *)s2)[i1];
+		i1 ++;
+		i2 ++;
+	}
+	s1[i2] = '\0';
+	return (s1);
 }
