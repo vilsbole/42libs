@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_max_depth.c                                     :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/15 20:14:54 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/15 20:29:49 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/30 15:01:38 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/01 20:32:49 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	"libft.h"
 
-int 	tr_max_depth(struct node *node)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	int		ldepth;
-	int		rdepth;
-	int		result;
+	size_t	len1;
+	size_t	len2;
+	char	*str;
 
-	if (node == NULL || (node->right == NULL && node->left == NULL))
-		return (0);
-	else
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	str = ft_strnew(len1 + len2 + 1);
+	if (str)
 	{
-		ldepth = tr_max_depth(node->left);
-		rdepth = tr_max_depth(node->right);
-		result = ldepth > rdepth ? ldepth + 1 : rdepth + 1;
-		return (result);
+		ft_memcpy(str, s1, len1);
+		ft_memcpy(str + len1, s2, len2 );
+		str[len1 + len2] = '\0';
+		return (str);
 	}
+	return (NULL);
 }

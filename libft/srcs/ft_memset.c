@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_max_depth.c                                     :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/15 20:14:54 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/15 20:29:49 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/20 19:21:31 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/02 19:53:22 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	<string.h>
 
-int 	tr_max_depth(struct node *node)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int		ldepth;
-	int		rdepth;
-	int		result;
+	size_t			i;
+	char			*tmp_ptr;
+	unsigned char	tmp_char;
 
-	if (node == NULL || (node->right == NULL && node->left == NULL))
+	tmp_char = (unsigned char) c;
+	tmp_ptr = (char *) b;
+	i = 0;
+	if (tmp_ptr == NULL)
 		return (0);
 	else
 	{
-		ldepth = tr_max_depth(node->left);
-		rdepth = tr_max_depth(node->right);
-		result = ldepth > rdepth ? ldepth + 1 : rdepth + 1;
-		return (result);
+		while (i < len)
+		{
+			tmp_ptr[i] = tmp_char;
+			i++;
+		}
+		return (b);
 	}
 }

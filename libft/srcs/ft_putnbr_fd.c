@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_max_depth.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/15 20:14:54 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/15 20:29:49 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/29 17:47:13 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/08 19:34:39 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	"libft.h"
 
-int 	tr_max_depth(struct node *node)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int		ldepth;
-	int		rdepth;
-	int		result;
-
-	if (node == NULL || (node->right == NULL && node->left == NULL))
-		return (0);
+	if (n == -2147483648)
+		ft_putstr_fd("-2147483648", fd);
+	else if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd(n * (-1), fd);
+	}
+	else if (n < 10)
+	{
+		ft_putchar_fd(n + '0', fd);
+	}
 	else
 	{
-		ldepth = tr_max_depth(node->left);
-		rdepth = tr_max_depth(node->right);
-		result = ldepth > rdepth ? ldepth + 1 : rdepth + 1;
-		return (result);
+		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd((n % 10) + '0', fd);
 	}
 }

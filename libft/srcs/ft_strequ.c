@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_max_depth.c                                     :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/15 20:14:54 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/15 20:29:49 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/30 14:01:06 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/11/30 14:24:20 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	"libft.h"
 
-int 	tr_max_depth(struct node *node)
+int		ft_strequ(const char *s1, const char *s2)
 {
-	int		ldepth;
-	int		rdepth;
-	int		result;
+	size_t	i;
+	size_t	len1;
+	size_t	len2;
 
-	if (node == NULL || (node->right == NULL && node->left == NULL))
+	i = 0;
+	len1 = 0;
+	len2 = 0;
+	if (s1 == NULL || s2 == NULL)
 		return (0);
-	else
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	if (len1 == len2)
 	{
-		ldepth = tr_max_depth(node->left);
-		rdepth = tr_max_depth(node->right);
-		result = ldepth > rdepth ? ldepth + 1 : rdepth + 1;
-		return (result);
+		while (i < len1 && s1[i] && s2[i])
+		{
+			if (s1[i] != s2[i])
+				return (0);
+			i ++;
+		}
+		return (1);
 	}
+	return (0);
 }

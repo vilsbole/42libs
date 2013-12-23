@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_max_depth.c                                     :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/15 20:14:54 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/15 20:29:49 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/24 16:56:56 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/11/26 19:54:09 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	"libft.h"
 
-int 	tr_max_depth(struct node *node)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int		ldepth;
-	int		rdepth;
-	int		result;
+	size_t	i;
+	const char	*src1;
+	const char	*src2;
 
-	if (node == NULL || (node->right == NULL && node->left == NULL))
+	if (s1 == NULL || s2 == NULL)
 		return (0);
-	else
+	src1 = s1;
+	src2 = s2;
+	i = 0;
+	while (i < n)
 	{
-		ldepth = tr_max_depth(node->left);
-		rdepth = tr_max_depth(node->right);
-		result = ldepth > rdepth ? ldepth + 1 : rdepth + 1;
-		return (result);
+		if (src1[i] != src2[i])
+			return ((unsigned char) src1[i] - (unsigned char) src2[i]);
+		i++;
 	}
+	return (0);
 }

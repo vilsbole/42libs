@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_max_depth.c                                     :+:      :+:    :+:   */
+/*   ft_otoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/15 20:14:54 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/15 20:29:49 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/12/23 19:47:59 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/23 19:48:01 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include "libpt.h"
 
-int 	tr_max_depth(struct node *node)
+char	*ft_otoa(unsigned int n)
 {
-	int		ldepth;
-	int		rdepth;
-	int		result;
+	char			*p;
+	int				size;
+	unsigned int	x;
 
-	if (node == NULL || (node->right == NULL && node->left == NULL))
-		return (0);
-	else
+	x = n;
+	size = 0;
+	while (x > 7)
 	{
-		ldepth = tr_max_depth(node->left);
-		rdepth = tr_max_depth(node->right);
-		result = ldepth > rdepth ? ldepth + 1 : rdepth + 1;
-		return (result);
+		x = x / 8;
+		size++;
 	}
+	p = (char *)malloc(sizeof(p) * (size + 1));
+	if (p)
+	{
+		p[size + 1] = '\0';
+		while (size >= 0)
+		{
+			x = n % 8;
+			p[size] = 48 + x;
+			n = n / 8;
+			size--;
+		}
+	}
+	return (p);
 }

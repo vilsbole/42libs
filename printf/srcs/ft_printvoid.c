@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_max_depth.c                                     :+:      :+:    :+:   */
+/*   ft_printvoid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/15 20:14:54 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/15 20:29:49 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/12/23 19:49:52 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/23 19:49:54 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include "libpt.h"
 
-int 	tr_max_depth(struct node *node)
+int		ft_printvoid(va_list ap)
 {
-	int		ldepth;
-	int		rdepth;
-	int		result;
+	char			*p;
+	unsigned long	c;
 
-	if (node == NULL || (node->right == NULL && node->left == NULL))
-		return (0);
-	else
-	{
-		ldepth = tr_max_depth(node->left);
-		rdepth = tr_max_depth(node->right);
-		result = ldepth > rdepth ? ldepth + 1 : rdepth + 1;
-		return (result);
-	}
+	ft_putstr("0x");
+	c = va_arg(ap, unsigned long);
+	p = ft_htoa(c);
+	ft_putstr(p);
+	return (ft_strlen(p) + 2);
 }

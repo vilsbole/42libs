@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_max_depth.c                                     :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/15 20:14:54 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/15 20:29:49 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/24 19:02:43 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/11/25 19:05:14 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	"libft.h"
 
-int 	tr_max_depth(struct node *node)
+char	*ft_strrchr(const char *s, int c)
 {
-	int		ldepth;
-	int		rdepth;
-	int		result;
+	char		target;
+	int			i;
 
-	if (node == NULL || (node->right == NULL && node->left == NULL))
+	if (s == NULL)
 		return (0);
 	else
 	{
-		ldepth = tr_max_depth(node->left);
-		rdepth = tr_max_depth(node->right);
-		result = ldepth > rdepth ? ldepth + 1 : rdepth + 1;
-		return (result);
+		target = ((char) c);
+		i = ft_strlen(s);
+		while (i > -1)
+		{
+			if (s[i] == target)
+				return ((char *) s + i);
+			i --;
+		}
 	}
+	return (0);
 }

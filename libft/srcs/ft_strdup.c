@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_max_depth.c                                     :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/15 20:14:54 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/15 20:29:49 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/11/24 18:52:43 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/11/24 22:36:42 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include	"libft.h"
 
-int 	tr_max_depth(struct node *node)
+char	*ft_strdup(const char *s1)
 {
-	int		ldepth;
-	int		rdepth;
-	int		result;
+	char	*cpy;
+	int		str_size;
 
-	if (node == NULL || (node->right == NULL && node->left == NULL))
-		return (0);
-	else
+	str_size = ft_strlen(s1);
+	cpy = (char *)malloc(sizeof(char) * str_size + 1);
+	if (cpy != NULL)
 	{
-		ldepth = tr_max_depth(node->left);
-		rdepth = tr_max_depth(node->right);
-		result = ldepth > rdepth ? ldepth + 1 : rdepth + 1;
-		return (result);
+		ft_strcpy(cpy, s1);
+		return (cpy);
 	}
+	else
+		return (0);
 }
