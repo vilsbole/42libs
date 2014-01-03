@@ -28,8 +28,8 @@ char	*ft_strcat(char *s1, const char *s2)
 	while (i2 < len2)
 	{
 		s1[i2] = ((char *)s2)[i1];
-		i1 ++;
-		i2 ++;
+		i1++;
+		i2++;
 	}
 	s1[i2] = '\0';
 	return (s1);

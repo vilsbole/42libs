@@ -24,7 +24,7 @@ void	ft_striter(char *s, void (*f)(char *))
 		while (i < len && s[i])
 		{
 			f(&s[i]);
-			i ++;
+			i++;
 		}
 	}
 	return ;

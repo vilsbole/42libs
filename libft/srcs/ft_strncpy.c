@@ -23,7 +23,7 @@ char	*ft_strncpy(char *s1, const char *s2, size_t n)
 	while (s2[i] && i < n)
 	{
 		s1[i] = s2[i];
-		i ++;
+		i++;
 	}
 	return (s1);
 }

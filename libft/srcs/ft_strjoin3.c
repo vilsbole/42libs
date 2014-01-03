@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_otoa.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/23 19:47:59 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/23 19:48:01 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/01/03 16:55:36 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/01/03 17:09:00 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libpt.h"
+#include "libft.h"
 
-char	*ft_otoa(unsigned int n)
+char	*ft_strjoin3(const char *s1, const char *s2, const char *s3)
 {
-	char			*p;
-	int				size;
-	unsigned int	x;
+	char	*tmp;
 
-	x = n;
-	size = 0;
-	while (x > 7)
+	tmp = NULL;
+	if (s1 && s2 && s3)
 	{
-		x = x / 8;
-		size++;
+		if ((tmp = ft_strjoin(s1, s2)))
+			tmp = ft_strjoin(tmp, s3);
 	}
-	p = (char *)malloc(sizeof(p) * (size + 1));
-	if (p)
-	{
-		p[size + 1] = '\0';
-		while (size >= 0)
-		{
-			x = n % 8;
-			p[size] = 48 + x;
-			n = n / 8;
-			size--;
-		}
-	}
-	return (p);
+	return (tmp);
 }

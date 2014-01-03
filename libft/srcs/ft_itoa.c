@@ -24,7 +24,7 @@ static int	ft_nbrlen(int n)
 	while (nb)
 	{
 		nb /= 10;
-		i ++;
+		i++;
 	}
 	return ((n < 0) ? i + 1 : i);
 }
@@ -38,7 +38,7 @@ char	*ft_itoa(int n)
 	val = n;
 	len = ft_nbrlen(n);
 	tmp = ft_strnew(len);
-	while (len --)
+	while (len--)
 	{
 		tmp[len] = (n < 0) ? (n % 10) * -1 + 48 : (n % 10) + 48;
 		n /= 10;

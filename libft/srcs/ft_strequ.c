@@ -31,7 +31,7 @@ int		ft_strequ(const char *s1, const char *s2)
 		{
 			if (s1[i] != s2[i])
 				return (0);
-			i ++;
+			i++;
 		}
 		return (1);
 	}

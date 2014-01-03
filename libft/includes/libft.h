@@ -6,7 +6,7 @@
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 17:27:39 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/02 20:16:15 by evilsbol         ###   ########.fr       */
+/*   Updated: 2014/01/03 17:06:53 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		ft_strequ(const char *s1, const char *s2);
 int		ft_strnequ(const char *s1, char const *s2, size_t n);
 char	*ft_strsub(const char *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strjoin3(const char *s1, const char *s2, const char *s3);
 char	*ft_strtrim(const char *s);
 char	**ft_strsplit(const char *s, char c);
 char	*ft_itoa(int n);

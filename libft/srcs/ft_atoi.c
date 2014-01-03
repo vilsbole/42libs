@@ -34,7 +34,7 @@ int		ft_atoi(const char *str)
 		tmp = num;
 		num *= 10;
 		num += str[i] - '0';
-		i ++;
+		i++;
 	}
 	return (num * sign);
 }

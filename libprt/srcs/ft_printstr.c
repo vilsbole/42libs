@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_printstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/16 20:14:38 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/16 20:14:45 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/12/23 19:49:27 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/23 19:49:29 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "get_next_line.h"
+#include "libprt.h"
 
-int main()
+int		ft_printstr(va_list ap)
 {
-    char    *s;
-    int     status;
+	char	*str;
 
-    while ((status = get_next_line(-1, &s)) > 0)
-    {
-        printf("[%s]\n", s);
-        free(s);
-    }
-    printf("%d\n", status);
-    return (0);
+	str = va_arg(ap, char*);
+	if (str == NULL)
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
+	ft_putstr(str);
+	return (ft_strlen(str));
 }

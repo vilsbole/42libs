@@ -24,13 +24,13 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	len = 0;
 	len1 = ft_strlen(dst);
 	while (dst[len] && len < size)
-		len ++;
+		len++;
 	if (!(len < size))
 		return (size + ft_strlen(src));
 	while (src[i] && i < (size - len1 - 1))
 	{
 		dst[len + i] = ((char *)src)[i];
-		i ++;
+		i++;
 	}
 	dst[len + i] = '\0';
 	return (len + ft_strlen(src));

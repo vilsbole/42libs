@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libpt.h"
+#include "libprt.h"
 
 static int		ft_chooseprint(va_list ap, char c)
 {

@@ -13,7 +13,7 @@
 #include	<stdlib.h>
 #include	"libtr.h"
 
-int 	tr_max_depth(struct node *node)
+int		tr_max_depth(struct node *node)
 {
 	int		ldepth;
 	int		rdepth;

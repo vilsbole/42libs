@@ -26,7 +26,7 @@ void	*ft_memccpy(void *s1, const void *s2, int c, size_t n)
 	{
 		if ((*tmp1++ = *tmp2++) == c)
 			return (tmp1);
-		i ++;
+		i++;
 	}
 	return (NULL);
 }

@@ -26,7 +26,7 @@ char	*ft_strmap(const char *s, char (*f)(char))
 		while (i < len && s[i])
 		{
 			str[i] = f(s[i]);
-			i ++;
+			i++;
 		}
 		str[i] = '\0';
 		return (str);

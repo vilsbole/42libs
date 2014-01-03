@@ -15,7 +15,7 @@
 
 void	tr_print_tree(t_node *tree)
 {
-	if (! tree)
+	if (!tree)
 		return ;
 	if (tree->left)
 		tr_print_tree(tree->left);

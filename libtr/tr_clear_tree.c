@@ -18,7 +18,7 @@ void	tr_clear_tree(t_node **tree)
 	t_node		*tmp_tree;
 
 	tmp_tree = *tree;
-	if (! tree)
+	if (!tree)
 		return ;
 	if (tmp_tree->left)
 		tr_clear_tree(&tmp_tree->left);

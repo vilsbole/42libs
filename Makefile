@@ -10,55 +10,52 @@
 #                                                                              #
 #******************************************************************************#
 
-# NORME COMPLIANT VARIABLES
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pedantic
-AR = ar
-ARFLAGS = -cvq
-RM = rm
-RMFLAGS = -rf
-
-NAME = libpt.a
-SRCDIR = srcs
-OBJDIR = .objs
-OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
-
 # PERSONNAL VARIABLES
-LPATH = -L./
-LIBS = -lpt
-HPATH = -Iincludes
-HEADERS = libpt.h
-
+LIBS = -L./ 
+HEAD = -Iincludes
 TEST = main.c
-EXEC = a.out
-NOW := $(shell date +"%c" | tr ' :' '_')
+EXEC =
+NAME = libpip.a
+SRCS =
 
-# Libtr Part I
-SRCS = 	ft_htoa.c ft_itoa.c ft_otoa.c ft_utoa.c \
-		ft_putchar.c ft_putstr.c ft_putnbr.c ft_strlen.c \
-		ft_printchar.c ft_printhexa.c ft_printnbr.c ft_printoctal.c \
-		ft_printstr.c ft_printunsigned.c ft_printvoid.c \
-		ft_printf.c
+# NORME COMPLIANT VARIABLES
+CC = gcc -Wall -Wextra -Werror -pedantic
+AR = ar -cvq
+RM = rm -rf
+SRCDIR = srcs
+OBJDIR = objs
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+NOW := $(shell date +"%c" | tr ' :' '_')
 
 # START RULES
 .PHONY: depend clean fclean re build run save
 
-all: $(NAME)
+all: lib $(EXEC)
+
+$(EXEC): $(NAME)
+	@$(CC) -o $(EXEC) $(TEST) $(LIBS) $(HEAD) 
 
 $(NAME): $(OBJS)
-	@$(AR) $(ARFLAGS) $@ $^
+	@$(AR) $@ $^
 	@ranlib $@
-	@echo $(NAME) built
+
+$(OBJS): | $(OBJDIR)
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
 
 $(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
-	@$(CC) $(CFLAGS) -o $@ -c $^ $(HPATH) 
+	@$(CC) -o $@ -c $^ $(HEAD) 
+
+lib:
+	@make -C
 
 clean:
-	@$(RM) $(RMFLAGS) $(OBJS)
+	@$(RM) $(OBJS)
 	@echo object files removed
 
 fclean: clean
-	@$(RM) $(RMFLAGS) $(NAME) $(EXEC)
+	@$(RM) $(NAME) $(EXEC)
 	@echo archive and executable files removed
 
 re: fclean
@@ -69,9 +66,6 @@ save:
 	@git add --all
 	@git commit -m 'saving $(NOW)'
 	@echo all files added and commited
-
-$(TEST): $(NAME)
-	@$(CC) $(CFLAGS) -o $(EXEC) $(TEST) $(LPATH) $(LIBS) $(HPATH) 
 
 run:
 	@echo "\033[32mSTART TEST\n"

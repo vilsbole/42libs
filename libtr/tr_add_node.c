@@ -12,11 +12,11 @@
 
 #include	"libtr.h"
 
-void tr_add_node(t_node **tree, unsigned int key)
+void	tr_add_node(t_node **tree, unsigned int key)
 {
-	t_node 	*tmp_node;
-	t_node 	*tmp_tree;
-	t_node 	*elem;
+	t_node	*tmp_node;
+	t_node	*tmp_tree;
+	t_node	*elem;
 
 	tmp_tree = *tree;
 	if (!(elem = tr_new_node(key)))

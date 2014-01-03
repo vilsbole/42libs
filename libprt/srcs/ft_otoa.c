@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_htoa.c                                          :+:      :+:    :+:   */
+/*   ft_otoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/23 19:47:22 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/23 19:47:32 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/12/23 19:47:59 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/23 19:48:01 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libpt.h"
+#include "libprt.h"
 
-static int		hexavalue(int x)
-{
-	if (0 <= x && x <= 9)
-		return (48 + x);
-	else if (10 <= x && x <= 15)
-	{
-		x = x - 10;
-		return (97 + x);
-	}
-	return (0);
-}
-
-char			*ft_htoa(unsigned long n)
+char	*ft_otoa(unsigned int n)
 {
 	char			*p;
 	int				size;
-	unsigned long	x;
+	unsigned int	x;
 
 	x = n;
 	size = 0;
-	while (x > 16)
+	while (x > 7)
 	{
-		x = x / 16;
+		x = x / 8;
 		size++;
 	}
 	p = (char *)malloc(sizeof(p) * (size + 1));
@@ -43,9 +31,9 @@ char			*ft_htoa(unsigned long n)
 		p[size + 1] = '\0';
 		while (size >= 0)
 		{
-			x = n % 16;
-			p[size] = hexavalue(x);
-			n = n / 16;
+			x = n % 8;
+			p[size] = 48 + x;
+			n = n / 8;
 			size--;
 		}
 	}

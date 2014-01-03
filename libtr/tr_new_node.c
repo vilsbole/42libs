@@ -13,7 +13,7 @@
 #include	<stdlib.h>
 #include	"libtr.h"
 
-t_node *tr_new_node(unsigned int key)
+t_node		*tr_new_node(unsigned int key)
 {
 	t_node	*elem;
 

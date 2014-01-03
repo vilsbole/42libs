@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libpt.h                                            :+:      :+:    :+:   */
+/*   libprt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/23 16:51:59 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/23 16:52:02 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/12/24 15:52:00 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/24 15:52:01 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBPT_H
-# define LIBPT_H
+#ifndef LIBPRT_H
+# define LIBPRT_H
 
-# include <stdio.h>
+# include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
-# include <unistd.h>
 
 void	ft_putstr(const char *s1);
 void	ft_putnbr(const int nb);
@@ -37,4 +36,4 @@ char	*ft_htoa(unsigned long nb);
 
 int		ft_printf(const char *s, ...);
 
-#endif /* ! LIBPT_H */
+#endif /* ! LIBPRT_H */

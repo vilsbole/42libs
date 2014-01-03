@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libpt.h"
+#include "libprt.h"
 
 static int		ft_nbrlen(int n)
 {
@@ -24,12 +24,12 @@ static int		ft_nbrlen(int n)
 	while (nb)
 	{
 		nb /= 10;
-		i ++;
+		i++;
 	}
 	return ((n < 0) ? i + 1 : i);
 }
 
-char	*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
 	int		val;
 	int		len;
@@ -40,7 +40,7 @@ char	*ft_itoa(int n)
 	str = (char *)malloc(sizeof(str) * len + 1);
 	if (str)
 	{	str[len + 1] = '\0';
-		while (len --)
+		while (len--)
 		{
 			str[len] = (n < 0) ? (n % 10) * -1 + 48 : (n % 10) + 48;
 			n = n / 10;

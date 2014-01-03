@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printnbr.c                                      :+:      :+:    :+:   */
+/*   ft_printoctal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/23 19:49:06 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/23 19:49:07 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/12/23 19:49:15 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/23 19:49:16 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libpt.h"
+#include "libprt.h"
 
-int		ft_printnbr(va_list ap)
+int		ft_printoctal(va_list ap)
 {
-	int		c;
-	char	*p;
+	char			*p;
+	unsigned int	c;
 
-	c = va_arg(ap, int);
-	p = ft_itoa(c);
+	c = va_arg(ap, unsigned int);
+	p = ft_otoa(c);
 	ft_putstr(p);
 	return (ft_strlen(p));
 }

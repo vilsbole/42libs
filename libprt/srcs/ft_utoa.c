@@ -1,24 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printhexa.c                                     :+:      :+:    :+:   */
+/*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/23 19:48:38 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/23 19:48:39 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/12/23 19:50:11 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/23 19:50:12 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libpt.h"
+#include "libprt.h"
 
-int		ft_printhexa(va_list ap)
+char	*ft_utoa(unsigned int n)
 {
 	char			*p;
-	unsigned int	c;
+	int				size;
+	unsigned int	x;
 
-	c = va_arg(ap, unsigned int);
-	p = ft_htoa(c);
-	ft_putstr(p);
-	return (ft_strlen(p));
+	x = n;
+	size = 0;
+	while (x > 10)
+	{
+		x /= 10;
+		size++;
+	}
+	p = (char *)malloc(sizeof(p) * (size + 1));
+	if (p)
+	{
+		p[size + 1] = '\0';
+		while (size >= 0)
+		{
+			x = n % 10;
+			p[size] = 48 + x;
+			n = n / 10;
+			size--;
+		}
+	}
+	return (p);
 }

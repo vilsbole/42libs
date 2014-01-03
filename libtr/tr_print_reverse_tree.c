@@ -15,7 +15,7 @@
 
 void	tr_print_reverse_tree(t_node *tree)
 {
-	if (! tree)
+	if (!tree)
 		return ;
 	if (tree->right)
 		tr_print_reverse_tree(tree->right);

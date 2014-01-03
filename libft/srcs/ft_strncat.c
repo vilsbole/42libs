@@ -24,8 +24,8 @@ char	*ft_strncat(char *s1, const char *s2, size_t n)
 	while (i < n && s2[i])
 	{
 		s1[len1] = ((char *)s2)[i];
-		len1 ++;
-		i ++;
+		len1++;
+		i++;
 	}
 	s1[len1] = '\0';
 	return (s1);
