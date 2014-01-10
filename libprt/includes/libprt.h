@@ -6,7 +6,7 @@
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/24 15:52:00 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/24 15:52:01 by evilsbol         ###   ########.fr       */
+/*   Updated: 2014/01/07 17:45:53 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 void	ft_putstr(const char *s1);
 void	ft_putnbr(const int nb);
 int		ft_putchar(const char c);
+int		ft_putint(int c);
 int		ft_printchar(va_list ap);
 int		ft_printstr(va_list ap);
 int		ft_printnbr(va_list ap);

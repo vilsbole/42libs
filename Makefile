@@ -6,16 +6,17 @@
 #    By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/16 19:38:04 by evilsbol          #+#    #+#              #
-#    Updated: 2013/12/16 19:38:06 by evilsbol         ###   ########.fr        #
+#    Updated: 2014/01/06 15:31:09 by evilsbol         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # PERSONNAL VARIABLES
-LIBS = -L./ 
+LIBS = -L./
 HEAD = -Iincludes
-TEST = main.c
-EXEC =
-NAME = libpip.a
+TEST =
+EXEC = main.c
+BINA =
+NAME =
 SRCS =
 
 # NORME COMPLIANT VARIABLES
@@ -32,8 +33,8 @@ NOW := $(shell date +"%c" | tr ' :' '_')
 
 all: lib $(EXEC)
 
-$(EXEC): $(NAME)
-	@$(CC) -o $(EXEC) $(TEST) $(LIBS) $(HEAD) 
+$(BINA): $(NAME)
+	@$(CC) -o $(BINA) $(EXEC) $(LIBS) $(HEAD)
 
 $(NAME): $(OBJS)
 	@$(AR) $@ $^
@@ -45,7 +46,7 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
 $(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
-	@$(CC) -o $@ -c $^ $(HEAD) 
+	@$(CC) -o $@ -c $^ $(HEAD)
 
 lib:
 	@make -C
@@ -55,7 +56,7 @@ clean:
 	@echo object files removed
 
 fclean: clean
-	@$(RM) $(NAME) $(EXEC)
+	@$(RM) $(NAME) $(BINA)
 	@echo archive and executable files removed
 
 re: fclean
@@ -69,8 +70,7 @@ save:
 
 run:
 	@echo "\033[32mSTART TEST\n"
-	@make $(TEST) && ./$(EXEC)
+	@make all  && ./$(BINA) $(TEST)
 	@echo "\033[32m\nEND TEST"
 
 # DO NOT DELETE THIS LINE -- make depends on it
- 	

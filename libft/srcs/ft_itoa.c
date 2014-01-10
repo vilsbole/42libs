@@ -29,7 +29,7 @@ static int	ft_nbrlen(int n)
 	return ((n < 0) ? i + 1 : i);
 }
 
-char	*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
 	int		val;
 	int		len;

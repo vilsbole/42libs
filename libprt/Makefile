@@ -6,7 +6,7 @@
 #    By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/16 19:38:04 by evilsbol          #+#    #+#              #
-#    Updated: 2013/12/16 19:38:06 by evilsbol         ###   ########.fr        #
+#    Updated: 2014/01/07 17:47:16 by evilsbol         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -34,8 +34,8 @@ EXEC = a.out
 NOW := $(shell date +"%c" | tr ' :' '_')
 
 # Libtr Part I
-SRCS = 	ft_htoa.c ft_itoa.c ft_otoa.c ft_utoa.c \
-		ft_putchar.c ft_putstr.c ft_putnbr.c ft_strlen.c \
+SRCS =	ft_htoa.c ft_itoa.c ft_otoa.c ft_utoa.c \
+		ft_putchar.c ft_putint.c ft_putstr.c ft_putnbr.c ft_strlen.c \
 		ft_printchar.c ft_printhexa.c ft_printnbr.c ft_printoctal.c \
 		ft_printstr.c ft_printunsigned.c ft_printvoid.c \
 		ft_printf.c
@@ -51,7 +51,7 @@ $(NAME): $(OBJS)
 	@echo $(NAME) built
 
 $(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
-	@$(CC) $(CFLAGS) -o $@ -c $^ $(HPATH) 
+	@$(CC) $(CFLAGS) -o $@ -c $^ $(HPATH)
 
 clean:
 	@$(RM) $(RMFLAGS) $(OBJS)
@@ -71,7 +71,7 @@ save:
 	@echo all files added and commited
 
 $(TEST): $(NAME)
-	@$(CC) $(CFLAGS) -o $(EXEC) $(TEST) $(LPATH) $(LIBS) $(HPATH) 
+	@$(CC) $(CFLAGS) -o $(EXEC) $(TEST) $(LPATH) $(LIBS) $(HPATH)
 
 run:
 	@echo "\033[32mSTART TEST\n"

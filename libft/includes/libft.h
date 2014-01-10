@@ -70,9 +70,10 @@ char	*ft_strjoin3(const char *s1, const char *s2, const char *s3);
 char	*ft_strtrim(const char *s);
 char	**ft_strsplit(const char *s, char c);
 char	*ft_itoa(int n);
-void	ft_putchar(char c);
-void	ft_putstr(const char *str);
-void	ft_putnbr(int nbr);
+
+int		ft_putchar(const char c);
+void	ft_putnbr(const int nb);
+void	ft_putstr(const char *s1);
 void	ft_putendl(const char *s);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char const *s, int fd);

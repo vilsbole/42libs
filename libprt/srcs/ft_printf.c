@@ -33,7 +33,7 @@ static int		ft_chooseprint(va_list ap, char c)
 	return (0);
 }
 
-int		ft_printf(char const *s, ...)
+int				ft_printf(char const *s, ...)
 {
 	int			i;
 	int			len;

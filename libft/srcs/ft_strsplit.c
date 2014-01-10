@@ -18,7 +18,7 @@ char		**ft_strsplit(const char *s, char c)
 	size_t	d;
 	int		start;
 	int		end;
-	char	**tab
+	char	**tab;
 
 	tab = NULL;
 	i = 0;
