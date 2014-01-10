@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2013/12/09 14:39:48 by evilsbol          #+#    #+#              #
-#    Updated: 2013/12/09 16:40:56 by evilsbol         ###   ########.fr        #
+#    Created: 2013/11/19 14:52:24 by evilsbol          #+#    #+#              #
+#    Updated: 2013/12/10 15:12:45 by evilsbol         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,18 +18,16 @@ ARFLAGS = -cvq
 RM = rm
 RMFLAGS = -rf
 
-NAME = get_next_line
-SRCS = get_next_line.c test.c
+NAME = libgnl.a
+SRCS = gnl.c
 OBJS = $(SRCS:.c=.o)
 
+LIBS = -lgnl -lft
+LPATH = -L./
+HEADERS = gnl.h
+HPATH = -I./ -I../libft/includes
 
 # PERSONNAL VARIABLES
-LPATH = -Llibft
-LIBS = -lft
-HPATH = -Ilibft/includes
-HEADERS = get_next_line.h
-
-EXEC = test_gnl
 NOW := $(shell date +"%c" | tr ' :' '_')
 
 # START RULES
@@ -37,29 +35,29 @@ NOW := $(shell date +"%c" | tr ' :' '_')
 
 all: $(NAME)
 
-$(NAME):
-	$(CC) $(CFLAGS) $(HPATH) -c $(SRCS)
-	$(CC) $(CFLAGS) $(LPATH) $(LIBS) $(OBJS) -o $(EXEC)
-	gcc -o test_gnl get_next_line.o test.o -L libft/ -lft
-
-lib:
-	make -C libft/ fclean
-	make -C libft
+$(NAME): $(OBJS)
+	@$(AR) $(ARFLAGS) $@ $^
+	@ranlib $@
+	@echo $(NAME) built
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $^ $(HPATH)
+	@$(CC) $(CFLAGS) $(HPATH) -o $@ -c $<
 
 clean:
-	@rm -rf $(OBJS)
+	@$(RM) $(RMFLAGS) $(OBJS)
+	@echo object files removed
 
 fclean: clean
-	@make -C libft/ fclean
 	@$(RM) $(RMFLAGS) $(NAME) $(EXEC)
 	@echo archive and executable files removed
 
 re: fclean
 	@make all
 
-run:
-	@make all
-	@./test_gnl cmp.txt
+# Personnal rules
+save:
+	@git add --all
+	@git commit -m 'saving $(NOW)'
+	@echo all files added and commited
+
+# DO NOT DELETE THIS LINE -- make depends on it

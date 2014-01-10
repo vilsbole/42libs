@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   gnl.c         				                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include "libft.h"
-#include "get_next_line.h"
+#include "gnl.h"
 
 static char	*join(char *s1, char *s2);
 static int cut_at_line(char **save_buff, char **line);
