@@ -64,7 +64,7 @@ NORME
 - ft_strnequ # lexicographical comparaison until n between s1 and s2. Return 1 if equal, else 0.
 - ft_strsub # allocates memory in heap and from start of s, copies len bytes. Return copy.
 - ft_strjoin # allocates memory in heap and returns concatenation of s1 and s2 NULL-terminating string. Return result or NULL.
-- ft_strtrim # allocates memory in heap and returns copy after removing characters ' ', '\n' and '\t' at begining or end of string. Return result or NULL.  
+- ft_strtrim # allocates memory in heap and returns copy after removing characters ' ', '\n' and '\t' at begining or end of string. Return result or NULL.	
 - ft_strsplit # takes s divides according to c and returns list of arrays. if no c, list is composed of single array. Return new or NULL.
 - ft_itoa # takes int n and returns new array of chars.
 - ft_putchar # puts single character on std-out.

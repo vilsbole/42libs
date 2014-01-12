@@ -5,35 +5,19 @@
 #                                                     +:+ +:+         +:+      #
 #    By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2013/11/19 14:52:24 by evilsbol          #+#    #+#              #
-#    Updated: 2014/01/03 17:08:03 by evilsbol         ###   ########.fr        #
+#    Created: 2013/12/16 19:38:04 by evilsbol          #+#    #+#              #
+#    Updated: 2014/01/08 17:20:16 by evilsbol         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-# NORME COMPLIANT VARIABLES
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pedantic
-AR = ar
-ARFLAGS = -cvq
-RM = rm
-RMFLAGS = -rf
-
+# PROJECT VARIABLES
 NAME = libft.a
-SRCDIR = srcs
+TEST = 
+LIBA =
+
+LPATH = -L./ -lprt
+HPATH = -Iincludes
 SRCS = $(SRC1) $(SRC2) $(SRC3) $(SRC4)
-OBJDIR = objs
-OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
-
-LIBS = -lft
-LPATH = -L./
-HEADERS = libft.h
-HPATH = -I./includes
-
-# PERSONNAL VARIABLES
-MAIN = test.c
-EXEC = test
-
-NOW := $(shell date +"%c" | tr ' :' '_')
 
 # Libft Part I
 SRC1 =	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
@@ -47,7 +31,6 @@ SRC2 =	ft_memalloc.c ft_memdel.c ft_strnew.c ft_strdel.c ft_strclr.c \
 		ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c ft_strequ.c \
 		ft_strnequ.c ft_strsub.c ft_strjoin.c ft_strtrim.c ft_strsplit.c \
 		ft_itoa.c ft_putendl.c ft_putchar.c ft_putstr.c ft_putnbr.c\
-		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 # Libft Bonus
 SRC3 =	ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c \
 #		ft_lstmap.c
@@ -55,31 +38,47 @@ SRC3 =	ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c \
 # Personnal rules
 SRC4 =	ft_strjoin3.c
 
+# STANDARD VARIABLES
+CC = gcc -Wall -Wextra -Werror -g #-pedantic
+AR = ar -cvq
+RM = rm -rf
+SRCDIR = srcs
+OBJDIR = objs
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+NOW := $(shell date +"%c" | tr ' :' '_')
+
+# COLORS
+DARK	= \033[1;32m
+CYAN	= \033[1;36m
+YELLOW	= \033[32m
+RED		= \033[1;31m
+WHITE	= \033[0m
+
+# MAKEHELP
+LOADING = ./makehelp/loading
+
 # START RULES
 .PHONY: depend clean fclean re build run save
 
 all: $(NAME)
-
+	
 $(NAME): $(OBJS)
-	@$(AR) $(ARFLAGS) $@ $^
+	@echo "$(YELLOW)linking project lib...$(DARK)"
+	@$(AR) $@ $^
 	@ranlib $@
-	@echo $(NAME) built
-
-$(OBJS): | $(OBJDIR)
-
-$(OBJDIR):
-	@mkdir $(OBJDIR)
-
+	@echo "$(WHITE)$(YELLOW)$(NAME) built$(WHITE)\n"
+	
 $(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
-	@$(CC) $(CFLAGS) $(HPATH) -o $@ -c $<
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(HPATH) -o $@ -c $^
 
 clean:
-	@$(RM) $(RMFLAGS) $(OBJS)
-	@echo object files removed
+	@echo "$(YELLOW)removing objs...$(WHITE)"
+	@$(RM) $(OBJDIR)
 
 fclean: clean
-	@$(RM) $(RMFLAGS) $(NAME) $(EXEC)
-	@echo archive and executable files removed
+	@echo "$(YELLOW)removing binary and libs...$(WHITE)"
+	@$(RM) $(NAME) $(LIBA)
 
 re: fclean
 	@make all
@@ -88,14 +87,12 @@ re: fclean
 save:
 	@git add --all
 	@git commit -m 'saving $(NOW)'
-	@echo all files added and commited
-
-$(MAIN): $(NAME)
-	@$(CC) $(CFLAGS) $(TEST) $(NAME) $(HPATH) -o $(EXEC)
+	@echo "$(YELLOW)all files added and commited$(WHITE)"
 
 run:
-	@echo "\033[32mSTART TEST\n"
-	@make $(TEST) && ./$(EXEC)
-	@echo "\033[32m\nEND TEST"
+	@make all
+	@echo "$(YELLOW)TEST BEGIN\n $(WHITE)"
+	@./$(NAME) $(TEST)
+	@echo "$(YELLOW) \nTEST END $(WHITE)"
 
 # DO NOT DELETE THIS LINE -- make depends on it

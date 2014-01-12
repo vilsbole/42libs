@@ -6,60 +6,72 @@
 #    By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/16 19:38:04 by evilsbol          #+#    #+#              #
-#    Updated: 2014/01/07 17:47:16 by evilsbol         ###   ########.fr        #
+#    Updated: 2014/01/08 17:20:16 by evilsbol         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-# NORME COMPLIANT VARIABLES
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pedantic
-AR = ar
-ARFLAGS = -cvq
-RM = rm
-RMFLAGS = -rf
-
+# PROJECT VARIABLES
 NAME = libprt.a
+TEST = 
+LIBA = 
+
+LPATH = -L./ -lprt
+HPATH = -Iincludes
+SRCS = $(SRC1) $(SRC2) $(SRC3)
+
+# Libptr Part I
+SRC1 =	ft_htoa.c ft_itoa.c ft_otoa.c ft_utoa.c \
+		ft_putchar.c ft_putint.c ft_putstr.c ft_putnbr.c ft_strlen.c \
+		ft_printchar.c ft_printhexa.c ft_printnbr.c ft_printoctal.c \
+		ft_printstr.c ft_printunsigned.c ft_printvoid.c
+
+SRC2 =	ft_putchar_fd.c ft_putint_fd.c ft_putstr_fd.c ft_putnbr_fd.c \
+		ft_printchar_fd.c ft_printhexa_fd.c ft_printnbr_fd.c ft_printoctal_fd.c \
+		ft_printstr_fd.c ft_printunsigned_fd.c ft_printvoid_fd.c
+
+SRC3 = ft_printf.c ft_printf_fd.c ft_fatal.c
+
+# STANDARD VARIABLES
+CC = gcc -Wall -Wextra -Werror -g #-pedantic
+AR = ar -cvq
+RM = rm -rf
 SRCDIR = srcs
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
-
-# PERSONNAL VARIABLES
-LPATH = -L./
-LIBS = -lprt
-HPATH = -Iincludes
-HEADERS = libprt.h
-
-TEST = main.c
-EXEC = a.out
 NOW := $(shell date +"%c" | tr ' :' '_')
 
-# Libtr Part I
-SRCS =	ft_htoa.c ft_itoa.c ft_otoa.c ft_utoa.c \
-		ft_putchar.c ft_putint.c ft_putstr.c ft_putnbr.c ft_strlen.c \
-		ft_printchar.c ft_printhexa.c ft_printnbr.c ft_printoctal.c \
-		ft_printstr.c ft_printunsigned.c ft_printvoid.c \
-		ft_printf.c
+# COLORS
+DARK	= \033[1;32m
+CYAN	= \033[1;36m
+YELLOW	= \033[32m
+RED		= \033[1;31m
+WHITE	= \033[0m
+
+# MAKEHELP
+LOADING = ./makehelp/loading
 
 # START RULES
 .PHONY: depend clean fclean re build run save
 
 all: $(NAME)
-
+	
 $(NAME): $(OBJS)
-	@$(AR) $(ARFLAGS) $@ $^
+	@echo "$(YELLOW)linking project lib...$(DARK)"
+	@$(AR) $@ $^
 	@ranlib $@
-	@echo $(NAME) built
-
+	@echo "$(WHITE)$(YELLOW)$(NAME) built$(WHITE)\n"
+	
 $(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
-	@$(CC) $(CFLAGS) -o $@ -c $^ $(HPATH)
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(HPATH) -o $@ -c $^
 
 clean:
-	@$(RM) $(RMFLAGS) $(OBJS)
-	@echo object files removed
+	@echo "$(YELLOW)removing objs...$(WHITE)"
+	@$(RM) $(OBJDIR)
 
 fclean: clean
-	@$(RM) $(RMFLAGS) $(NAME) $(EXEC)
-	@echo archive and executable files removed
+	@echo "$(YELLOW)removing binary and libs...$(WHITE)"
+	@$(RM) $(NAME) $(LIBA)
 
 re: fclean
 	@make all
@@ -68,15 +80,12 @@ re: fclean
 save:
 	@git add --all
 	@git commit -m 'saving $(NOW)'
-	@echo all files added and commited
-
-$(TEST): $(NAME)
-	@$(CC) $(CFLAGS) -o $(EXEC) $(TEST) $(LPATH) $(LIBS) $(HPATH)
+	@echo "$(YELLOW)all files added and commited$(WHITE)"
 
 run:
-	@echo "\033[32mSTART TEST\n"
-	@make $(TEST) && ./$(EXEC)
-	@echo "\033[32m\nEND TEST"
+	@make all
+	@echo "$(YELLOW)TEST BEGIN\n $(WHITE)"
+	@./$(NAME) $(TEST)
+	@echo "$(YELLOW) \nTEST END $(WHITE)"
 
 # DO NOT DELETE THIS LINE -- make depends on it
- 	
