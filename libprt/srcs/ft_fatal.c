@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libprt.h"
-#include <stdio.h>
+
 void	ft_fatal(char *binary)
 {
 	if (!binary)

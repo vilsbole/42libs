@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   lst_search.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 16:01:40 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/11/22 16:30:11 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/01/14 18:41:07 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/01/14 18:44:04 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<unistd.h>
+#include "liblst.h"
 
-int		ft_putchar_fd(int fd, char c)
+char	*lst_search(t_list *list, int key)
 {
-	if (c)
-		write(fd, &c, 1);
-	return (1);
+	t_list	*current;
+
+	if (list && key)
+		current = list;
+	while (list && current)
+	{
+		if (current->key == key)
+			return (current->content);
+		current = current->next;
+	}
+	return (NULL);
 }

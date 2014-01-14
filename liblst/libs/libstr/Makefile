@@ -6,33 +6,23 @@
 #    By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/16 19:38:04 by evilsbol          #+#    #+#              #
-#    Updated: 2014/01/08 17:20:16 by evilsbol         ###   ########.fr        #
+#    Updated: 2014/01/14 19:38:33 by evilsbol         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # PROJECT VARIABLES
-NAME = libprt.a
-TEST = 
-LIBA = 
+NAME = $(LIBA)
+LIBA = libstr.a
+TEST =
 
-LPATH = -L./ -lprt
-HPATH = -Iincludes
-SRCS = $(SRC1) $(SRC2) $(SRC3)
+LPATH = -L./ -lstr
 
-# Libptr Part I
-SRC1 =	ft_htoa.c ft_itoa.c ft_otoa.c ft_utoa.c \
-		ft_putchar.c ft_putint.c ft_putstr.c ft_putnbr.c ft_strlen.c \
-		ft_printchar.c ft_printhexa.c ft_printnbr.c ft_printoctal.c \
-		ft_printstr.c ft_printunsigned.c ft_printvoid.c
+HPATH = -Iincludes\
 
-SRC2 =	ft_putchar_fd.c ft_putint_fd.c ft_putstr_fd.c ft_putnbr_fd.c \
-		ft_printchar_fd.c ft_printhexa_fd.c ft_printnbr_fd.c ft_printoctal_fd.c \
-		ft_printstr_fd.c ft_printunsigned_fd.c ft_printvoid_fd.c
-
-SRC3 = ft_printf.c ft_printf_fd.c ft_fatal.c
+SRCS = ft_strlen.c ft_strdup.c ft_strcpy.c
 
 # STANDARD VARIABLES
-CC = gcc -Wall -Wextra -Werror -g #-pedantic
+CC = gcc -Wall -Wextra -Werror -g -pedantic
 AR = ar -cvq
 RM = rm -rf
 SRCDIR = srcs
@@ -40,12 +30,21 @@ OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 NOW := $(shell date +"%c" | tr ' :' '_')
 
+ifeq (run,$(firstword $(MAKECMDGOALS)))
+  ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+  $(eval $ARGS):;@:)
+endif
+
 # COLORS
 DARK	= \033[1;32m
 CYAN	= \033[1;36m
 YELLOW	= \033[38;5;3m
 RED		= \033[1;31m
 WHITE	= \033[0m
+NO_COLOR	= \x1b[0m
+OK_COLOR	= \x1b[32;01m
+ERROR_COLOR	= \x1b[31;01m
+WARN_COLOR	= \x1b[33;01m
 
 # MAKEHELP
 LOADING = ./makehelp/loading
@@ -54,13 +53,13 @@ LOADING = ./makehelp/loading
 .PHONY: depend clean fclean re build run save
 
 all: $(NAME)
-	
+	@echo "$(WHITE)$(YELLOW)$(NAME) built!$(WHITE)"
+
 $(NAME): $(OBJS)
 	@echo "$(YELLOW)linking project lib...$(DARK)"
 	@$(AR) $@ $^
 	@ranlib $@
-	@echo "$(WHITE)$(YELLOW)$(NAME) built$(WHITE)\n"
-	
+
 $(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(HPATH) -o $@ -c $^
@@ -77,6 +76,14 @@ re: fclean
 	@make all
 
 # Personnal rules
+start:
+	@mkdir libs
+	@cp -rf ~/Dropbox/Projects/42libs/libft ./libs/
+	@cp -rf ~/Dropbox/Projects/42libs/libprt ./libs/
+	@mkdir ./srcs
+	@mkdir ./includes
+	@git init
+
 save:
 	@git add --all
 	@git commit -m 'saving $(NOW)'
@@ -85,7 +92,7 @@ save:
 run:
 	@make all
 	@echo "$(YELLOW)TEST BEGIN\n $(WHITE)"
-	@./$(NAME) $(TEST)
+	@./$(NAME) $(ARGS)
 	@echo "$(YELLOW) \nTEST END $(WHITE)"
 
 # DO NOT DELETE THIS LINE -- make depends on it

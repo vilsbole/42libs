@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   lst_print_b.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 16:01:40 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/11/22 16:30:11 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/01/14 18:38:14 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/01/14 18:57:49 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<unistd.h>
+#include "liblst.h"
 
-int		ft_putchar_fd(int fd, char c)
+void	lst_print_b(t_list *list)
 {
-	if (c)
-		write(fd, &c, 1);
-	return (1);
+	t_list		*current;
+
+	if (!list)
+		return ;
+	current = list;
+	while (current)
+		current = current->next;
+	while (current)
+	{
+		printf("%s\n", current->content);
+		current = current->prev;
+	}
 }

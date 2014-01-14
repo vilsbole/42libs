@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 16:01:40 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/11/22 16:30:11 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/01/14 19:13:57 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/01/14 19:42:02 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<unistd.h>
+#include "libstr.h"
 
-int		ft_putchar_fd(int fd, char c)
+char	*ft_strdup(const char *str)
 {
-	if (c)
-		write(fd, &c, 1);
-	return (1);
+	char	*cpy;
+	int		len;
+
+	len = ft_strlen(str);
+	if ((cpy = (char *)malloc(sizeof(char) * len + 1)))
+		return (ft_strcpy(cpy, str));
+	else
+		return (NULL);
 }

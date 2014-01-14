@@ -1,20 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   lst_argv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 16:01:40 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/11/22 16:30:11 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/01/14 19:03:08 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/01/14 19:06:17 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<unistd.h>
+#include "liblst.h"
 
-int		ft_putchar_fd(int fd, char c)
+t_list		*lst_argv(int argc, char **argv)
 {
-	if (c)
-		write(fd, &c, 1);
-	return (1);
+	int		i;
+	char	*content;
+	t_list	*elem;
+	t_list	*head;
+
+	i = 1;
+	head = NULL;
+	while (i < argc)
+	{
+		content = ft_strdup(argv[i]);
+		if (content && (elem = lst_new_elem(i, content)))
+		{
+			if (head == NULL)
+				head = elem;
+			else
+				lst_append(&head, elem);
+		}
+		else
+		{
+			free(content);
+			return (NULL);
+		}
+		i++;
+	}
+	return (head);
 }
+

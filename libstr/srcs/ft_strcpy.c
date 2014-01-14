@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 16:01:40 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/11/22 16:30:11 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/01/14 19:30:30 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/01/14 19:36:03 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<unistd.h>
+#include "libstr.h"
 
-int		ft_putchar_fd(int fd, char c)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	if (c)
-		write(fd, &c, 1);
-	return (1);
+	int		i;
+
+	i = 0;
+	if (!(dst && src))
+		return (NULL);
+	while (dst[i] && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

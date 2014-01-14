@@ -11,28 +11,23 @@
 #******************************************************************************#
 
 # PROJECT VARIABLES
-NAME = libprt.a
+NAME = main
+LIBA = liblst.a
 TEST = 
-LIBA = 
+LIBDEP = ./libs/libstr
 
-LPATH = -L./ -lprt
-HPATH = -Iincludes
-SRCS = $(SRC1) $(SRC2) $(SRC3)
+LPATH = -L./ -llst\
+		-L./libs/libstr -lstr
 
-# Libptr Part I
-SRC1 =	ft_htoa.c ft_itoa.c ft_otoa.c ft_utoa.c \
-		ft_putchar.c ft_putint.c ft_putstr.c ft_putnbr.c ft_strlen.c \
-		ft_printchar.c ft_printhexa.c ft_printnbr.c ft_printoctal.c \
-		ft_printstr.c ft_printunsigned.c ft_printvoid.c
+HPATH = -Iincludes\
+		-Ilibs/libstr/includes
 
-SRC2 =	ft_putchar_fd.c ft_putint_fd.c ft_putstr_fd.c ft_putnbr_fd.c \
-		ft_printchar_fd.c ft_printhexa_fd.c ft_printnbr_fd.c ft_printoctal_fd.c \
-		ft_printstr_fd.c ft_printunsigned_fd.c ft_printvoid_fd.c
-
-SRC3 = ft_printf.c ft_printf_fd.c ft_fatal.c
+SRCS =  lst_print_f.c lst_print_b.c lst_search.c lst_new_elem.c\
+		lst_push.c lst_append.c lst_clear.c lst_argv.c\
+		test.c
 
 # STANDARD VARIABLES
-CC = gcc -Wall -Wextra -Werror -g #-pedantic
+CC = gcc -Wall -Wextra -Werror -g -pedantic
 AR = ar -cvq
 RM = rm -rf
 SRCDIR = srcs
@@ -40,12 +35,21 @@ OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 NOW := $(shell date +"%c" | tr ' :' '_')
 
+#ifeq (run,$(firstword $(MAKECMDGOALS)))
+ # ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+ # $(eval $ARGS):;@:)
+#endif
+
 # COLORS
 DARK	= \033[1;32m
 CYAN	= \033[1;36m
 YELLOW	= \033[38;5;3m
 RED		= \033[1;31m
 WHITE	= \033[0m
+NO_COLOR	= \x1b[0m
+OK_COLOR	= \x1b[32;01m
+ERROR_COLOR	= \x1b[31;01m
+WARN_COLOR	= \x1b[33;01m
 
 # MAKEHELP
 LOADING = ./makehelp/loading
@@ -53,17 +57,25 @@ LOADING = ./makehelp/loading
 # START RULES
 .PHONY: depend clean fclean re build run save
 
-all: $(NAME)
+all: libdep $(NAME)
+	@echo "$(WHITE)$(YELLOW)ready to rumble!$(WHITE)"
+
+$(NAME): $(LIBA)
+	@echo "$(YELLOW)building binary...$(RED)"
+	@$(CC) -o $(NAME) $(LPATH) $(HPATH)
 	
-$(NAME): $(OBJS)
+$(LIBA): $(OBJS)
 	@echo "$(YELLOW)linking project lib...$(DARK)"
 	@$(AR) $@ $^
 	@ranlib $@
-	@echo "$(WHITE)$(YELLOW)$(NAME) built$(WHITE)\n"
-	
+	@echo "$(WHITE)$(YELLOW)$(LIBA) built$(WHITE)\n"
+
 $(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(HPATH) -o $@ -c $^
+
+libdep:
+	@make -C $(LIBDEP)
 
 clean:
 	@echo "$(YELLOW)removing objs...$(WHITE)"
@@ -77,6 +89,14 @@ re: fclean
 	@make all
 
 # Personnal rules
+start:
+	@mkdir libs
+	@cp -rf ~/Dropbox/Projects/42libs/libft ./libs/
+	@cp -rf ~/Dropbox/Projects/42libs/libprt ./libs/
+	@mkdir ./srcs
+	@mkdir ./includes
+	@git init
+
 save:
 	@git add --all
 	@git commit -m 'saving $(NOW)'
@@ -85,7 +105,7 @@ save:
 run:
 	@make all
 	@echo "$(YELLOW)TEST BEGIN\n $(WHITE)"
-	@./$(NAME) $(TEST)
+	@./$(NAME) one two three four five six
 	@echo "$(YELLOW) \nTEST END $(WHITE)"
 
 # DO NOT DELETE THIS LINE -- make depends on it

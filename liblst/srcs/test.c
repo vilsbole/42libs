@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 16:01:40 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/11/22 16:30:11 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/01/14 19:00:50 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/01/14 19:02:04 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<unistd.h>
+#include "liblst.h"
 
-int		ft_putchar_fd(int fd, char c)
+int		main(int argc, char **argv)
 {
-	if (c)
-		write(fd, &c, 1);
-	return (1);
+	t_list		*head;
+
+	if (argc <= 1)
+		printf("usage: ./lst <arg1> <arg2> <...>");
+	head = lst_argv(argc, argv);
+	lst_print_f(head);
+	lst_print_b(head);
+	lst_clear(&head);
+	return (0);
 }

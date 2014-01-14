@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 16:01:40 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/11/22 16:30:11 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/01/14 19:27:41 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/01/14 19:38:53 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<unistd.h>
+#include "libstr.h"
 
-int		ft_putchar_fd(int fd, char c)
+int		ft_strlen(const char *str)
 {
-	if (c)
-		write(fd, &c, 1);
-	return (1);
+	int		len;
+
+	len = 0;
+	while (str && str[len] != '\0')
+		len++;
+	return (len);
 }

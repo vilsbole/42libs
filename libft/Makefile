@@ -50,7 +50,7 @@ NOW := $(shell date +"%c" | tr ' :' '_')
 # COLORS
 DARK	= \033[1;32m
 CYAN	= \033[1;36m
-YELLOW	= \033[32m
+YELLOW	= \033[38;5;3m
 RED		= \033[1;31m
 WHITE	= \033[0m
 
