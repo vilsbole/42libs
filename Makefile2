@@ -1,0 +1,116 @@
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2013/12/16 19:38:04 by evilsbol          #+#    #+#              #
+#    Updated: 2014/01/14 17:48:18 by evilsbol         ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
+
+# PROJECT VARIABLES
+NAME = wolf3d
+LIBA = libwolf.a
+TEST =
+
+LPATH = -L./ -lwolf\
+		-L/usr/X11/lib -lmlx -lXext -lx11\
+		-L./libs/libft -lft\
+		-L./libs/libprt -lprt
+
+HPATH = -Iincludes\
+		-I./libs/libprt/includes\
+		-I./libs/libft/includes
+
+SRCS =  main.c
+
+# STANDARD VARIABLES
+CC = gcc -Wall -Wextra -Werror -g #-pedantic
+AR = ar -cvq
+RM = rm -rf
+SRCDIR = srcs
+OBJDIR = objs
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+NOW := $(shell date +"%c" | tr ' :' '_')
+
+# COLORS
+DARK	= \033[1;32m
+CYAN	= \033[1;36m
+YELLOW	= \033[38;5;3m
+RED		= \033[1;31m
+WHITE	= \033[0m
+NO_COLOR=\x1b[0m
+OK_COLOR=\x1b[32;01m
+ERROR_COLOR=\x1b[31;01m
+WARN_COLOR=\x1b[33;01m
+
+# MAKEHELP
+LOADING = ./makehelp/loading
+
+ifeq (run,$(firstword $(MAKECMDGOALS)))
+  RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+  $(eval $(RUN_ARGS):;@:)
+endif
+
+# START RULES
+.PHONY: depend clean fclean re build run save
+
+all: libdep $(NAME)
+	@echo "$(WHITE)$(YELLOW)ready to rumble!$(WHITE)"
+
+$(NAME): $(LIBA)
+	@echo "$(YELLOW)building binary...$(RED)"
+	@$(CC) -o $(NAME) $(LPATH) $(HPATH)
+
+$(LIBA): $(OBJS)
+	@echo "$(YELLOW)linking project lib...$(DARK)"
+	@$(AR) $@ $^
+	@ranlib $@
+	@echo "$(WHITE)$(YELLOW)$(LIBA) built$(WHITE)\n"
+
+$(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(HPATH) -o $@ -c $^
+
+libdep:
+	@make -C libs/libft
+	@make -C libs/libprt
+
+libdepclean:
+	@make -C libs/libft fclean
+	@make -C libs/libprt fclean
+
+clean:
+	@echo "$(YELLOW)removing objs...$(WHITE)"
+	@$(RM) $(OBJDIR)
+
+fclean: clean
+	@echo "$(YELLOW)removing binary and libs...$(WHITE)"
+	@$(RM) $(NAME) $(LIBA)
+
+re: fclean
+	@make all
+
+# Personnal rules
+start:
+	@mkdir libs
+	@cp -rf ~/Dropbox/Projects/42libs/libft ./libs/
+	@cp -rf ~/Dropbox/Projects/42libs/libprt ./libs/
+	@mkdir ./srcs
+	@mkdir ./includes
+	@git init
+
+save:
+	@git add --all
+	@git commit -m 'saving $(NOW)'
+	@echo "$(YELLOW)all files added and commited$(WHITE)"
+
+run:
+	@make all
+	@echo "$(YELLOW)TEST BEGIN\n $(WHITE)"
+	@./$(NAME) $(RUN_ARGS)
+	@echo "$(YELLOW) \nTEST END $(WHITE)"
+
+# DO NOT DELETE THIS LINE -- make depends on it
