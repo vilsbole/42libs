@@ -23,7 +23,7 @@ void	lst_print_b(t_list *list)
 		current = current->next;
 	while (current)
 	{
-		printf("%s\n", current->content);
+		ft_printf("%s\n", current->content);
 		current = current->prev;
 	}
 }

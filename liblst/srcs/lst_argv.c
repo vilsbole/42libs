@@ -24,7 +24,7 @@ t_list		*lst_argv(int argc, char **argv)
 	while (i < argc)
 	{
 		content = ft_strdup(argv[i]);
-		if (content && (elem = lst_new_elem(i, content)))
+		if (content && (elem = lst_new_elem(i, NULL, content)))
 		{
 			if (head == NULL)
 				head = elem;

@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   tr_print_tree.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/29 17:23:09 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/02 22:20:54 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/12/16 19:42:16 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/16 19:42:17 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"libft.h"
+#include	"libtr.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	tr_print_tree(t_node *tree)
 {
-	write(fd, &c, 1);
+	if (!tree)
+		return ;
+	if (tree->left)
+		tr_print_tree(tree->left);
+	ft_printf("Key = %d\n", tree->key);
+	if (tree->right)
+		tr_print_tree(tree->right);
 }

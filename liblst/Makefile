@@ -11,20 +11,16 @@
 #******************************************************************************#
 
 # PROJECT VARIABLES
-NAME = main
+NAME = $(LIBA)
 LIBA = liblst.a
-TEST = 
-LIBDEP = ./libs/libstr
 
-LPATH = -L./ -llst\
-		-L./libs/libstr -lstr
+HPATH = -I./includes \
+		-I../libprt/includes \
+		-I../libft/includes
 
-HPATH = -Iincludes\
-		-Ilibs/libstr/includes
-
-SRCS =  lst_print_f.c lst_print_b.c lst_search.c lst_new_elem.c\
-		lst_push.c lst_append.c lst_clear.c lst_argv.c\
-		test.c
+SRCS =  lst_print_f.c lst_print_b.c lst_search.c lst_new_elem.c \
+		lst_new_list.c lst_length.c\
+		lst_push.c lst_append.c lst_clear.c lst_argv.c \
 
 # STANDARD VARIABLES
 CC = gcc -Wall -Wextra -Werror -g -pedantic
@@ -35,54 +31,49 @@ OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 NOW := $(shell date +"%c" | tr ' :' '_')
 
-#ifeq (run,$(firstword $(MAKECMDGOALS)))
- # ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
- # $(eval $ARGS):;@:)
-#endif
+ifeq (run,$(firstword $(MAKECMDGOALS)))
+ RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+ $(eval $RUN_ARGS):;@:)
+endif
 
 # COLORS
-DARK	= \033[1;32m
-CYAN	= \033[1;36m
-YELLOW	= \033[38;5;3m
-RED		= \033[1;31m
-WHITE	= \033[0m
-NO_COLOR	= \x1b[0m
-OK_COLOR	= \x1b[32;01m
-ERROR_COLOR	= \x1b[31;01m
-WARN_COLOR	= \x1b[33;01m
+RESET=		\033[0m
+DARK=		\033[1;32m
+RED=		\033[31m
+GREEN=		\033[32m
+YELLOW=		\033[33m
+BLUE=		\033[34m
+MAGENTA=	\033[35m
+CYAN=		\033[36m
+WHITE=		\033[37m
+BOLDBLACK=	\033[1m\033[30m
+BOLDRED=	\033[1m\033[31m
+BOLDWHITE=	\033[1m\033[37m
 
 # MAKEHELP
 LOADING = ./makehelp/loading
 
 # START RULES
-.PHONY: depend clean fclean re build run save
+.PHONY: all depend clean fclean re build run save
 
-all: libdep $(NAME)
-	@echo "$(WHITE)$(YELLOW)ready to rumble!$(WHITE)"
+all: $(NAME)
 
-$(NAME): $(LIBA)
-	@echo "$(YELLOW)building binary...$(RED)"
-	@$(CC) -o $(NAME) $(LPATH) $(HPATH)
-	
-$(LIBA): $(OBJS)
+$(NAME): $(OBJS)
 	@echo "$(YELLOW)linking project lib...$(DARK)"
 	@$(AR) $@ $^
 	@ranlib $@
-	@echo "$(WHITE)$(YELLOW)$(LIBA) built$(WHITE)\n"
-
+	@echo "$(RESET)$(YELLOW)$(LIBA) built$(RESET)\n"
+	
 $(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(HPATH) -o $@ -c $^
 
-libdep:
-	@make -C $(LIBDEP)
-
 clean:
-	@echo "$(YELLOW)removing objs...$(WHITE)"
+	@echo "$(YELLOW)removing objs...$(RESET)"
 	@$(RM) $(OBJDIR)
 
 fclean: clean
-	@echo "$(YELLOW)removing binary and libs...$(WHITE)"
+	@echo "$(YELLOW)removing binary and libs...$(RESET)"
 	@$(RM) $(NAME) $(LIBA)
 
 re: fclean
@@ -105,7 +96,7 @@ save:
 run:
 	@make all
 	@echo "$(YELLOW)TEST BEGIN\n $(WHITE)"
-	@./$(NAME) one two three four five six
+	@./$(NAME) $(RUN_ARGS)
 	@echo "$(YELLOW) \nTEST END $(WHITE)"
 
 # DO NOT DELETE THIS LINE -- make depends on it

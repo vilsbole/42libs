@@ -10,15 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <sys/uio.h>
-#include "libft.h"
 #include "gnl.h"
 
-static char	*join(char *s1, char *s2);
-static int cut_at_line(char **save_buff, char **line);
-
-int			get_next_line(int const fd, char **line)
+int		get_next_line(int const fd, char **line)
 {
 	int			bytes_read;
 	char		buff[BUFF_SIZE + 1];
@@ -33,7 +27,7 @@ int			get_next_line(int const fd, char **line)
 		if (cut_at_line(&save_buff, line))
 			return (1);
 	}
-	if (bytes_read < 0)
+	if (bytes_read <= 0)
 		return (-1);
 	if (save_buff && *save_buff)
 	{
@@ -44,7 +38,7 @@ int			get_next_line(int const fd, char **line)
 	return (0);
 }
 
-static char	*join(char *s1, char *s2)
+char	*join(char *s1, char *s2)
 {
 	size_t	len1;
 	size_t	len2;
@@ -64,7 +58,7 @@ static char	*join(char *s1, char *s2)
 	return (result);
 }
 
-static int	cut_at_line(char **save_buff, char **line)
+int		cut_at_line(char **save_buff, char **line)
 {
 	char	*limit;
 

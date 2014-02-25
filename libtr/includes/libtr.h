@@ -13,6 +13,10 @@
 #ifndef LIBTR_H
 # define LIBTR_H
 
+# include <stdlib.h>
+# include <stdio.h>
+# include "libprt.h"
+
 typedef struct	node
 {
 	unsigned int	key;

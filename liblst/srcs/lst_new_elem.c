@@ -12,7 +12,7 @@
 
 #include "liblst.h"
 
-t_list		*lst_new_elem(int key, char *content)
+t_list		*lst_new_elem(int key, char *name, void *content)
 {
 	t_list		*elem;
 
@@ -20,6 +20,7 @@ t_list		*lst_new_elem(int key, char *content)
 	if ((elem = (t_list *)malloc(sizeof(t_list))))
 	{
 		elem->key = key;
+		elem->name = name;
 		elem->content = content;
 		elem->prev = NULL;
 		elem->next = NULL;

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   tr_print_reverse_tree.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/29 18:16:42 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/11/29 18:18:04 by evilsbol         ###   ########.fr       */
+/*   Created: 2013/12/16 19:42:03 by evilsbol          #+#    #+#             */
+/*   Updated: 2013/12/16 19:42:04 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"libft.h"
+#include	"libtr.h"
 
-void	ft_putendl_fd(const char *s, int fd)
+void	tr_print_reverse_tree(t_node *tree)
 {
-	if (s && fd && fd > 0 && fd < 1024 * 1024)
-	{
-		ft_putstr_fd(s, fd);
-		ft_putchar_fd('\n', fd);
-	}
-	return ;
+	if (!tree)
+		return ;
+	if (tree->right)
+		tr_print_reverse_tree(tree->right);
+	ft_printf("key = %d\n", tree->key);
+	if (tree->left)
+		tr_print_reverse_tree(tree->left);
 }

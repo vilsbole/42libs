@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   lst_new_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/08 20:06:34 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/08 20:08:39 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/02/14 17:34:03 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/02/14 17:38:45 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"libft.h"
+#include "liblst.h"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
+t_list	*lst_new_list(void)
 {
-	del((*alst)->content, (*alst)->content_size);
-	free(*alst);
-	*alst = NULL;
+	char	*content = NULL;
+
+	return (lst_new_elem(0, NULL, content));
 }

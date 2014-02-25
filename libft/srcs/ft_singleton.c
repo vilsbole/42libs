@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_singleton.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/01/14 19:30:30 by evilsbol          #+#    #+#             */
-/*   Updated: 2014/01/14 19:36:03 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/02/14 16:47:56 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/02/14 16:53:41 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libstr.h"
+#include	"libft.h"
 
-char	*ft_strcpy(char *dst, const char *src)
+int		*ft_singleton(int init)
 {
-	int		i;
+	static int	*sig = NULL;
 
-	i = 0;
-	if (!(dst && src))
-		return (NULL);
-	while (dst[i] && src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
+	if (sig == NULL)
+		sig = (int *)malloc(sizeof(int));
+	if (init)
+		*sig = init;
+	return (sig);
 }

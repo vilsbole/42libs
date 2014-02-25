@@ -15,8 +15,8 @@
 int		lst_append(t_list **list, t_list *elem)
 {
 	t_list		*current;
-	
-	if (!(list && elem))
+
+	if (!(*list && elem))
 		return (0);
 	else
 	{

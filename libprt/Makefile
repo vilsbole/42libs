@@ -11,13 +11,12 @@
 #******************************************************************************#
 
 # PROJECT VARIABLES
-NAME = libprt.a
-TEST = 
-LIBA = 
+NAME = $(LIBA)
+LIBA = libprt.a
 
 LPATH = -L./ -lprt
 HPATH = -Iincludes
-SRCS = $(SRC1) $(SRC2) $(SRC3)
+SRCS = $(SRC1) $(SRC2) $(SRC3) $(EXTRA)
 
 # Libptr Part I
 SRC1 =	ft_htoa.c ft_itoa.c ft_otoa.c ft_utoa.c \
@@ -30,6 +29,8 @@ SRC2 =	ft_putchar_fd.c ft_putint_fd.c ft_putstr_fd.c ft_putnbr_fd.c \
 		ft_printstr_fd.c ft_printunsigned_fd.c ft_printvoid_fd.c
 
 SRC3 = ft_printf.c ft_printf_fd.c ft_fatal.c
+
+EXTRA = ft_quit.c
 
 # STANDARD VARIABLES
 CC = gcc -Wall -Wextra -Werror -g #-pedantic
@@ -51,7 +52,7 @@ WHITE	= \033[0m
 LOADING = ./makehelp/loading
 
 # START RULES
-.PHONY: depend clean fclean re build run save
+.PHONY: all depend clean fclean re build run save
 
 all: $(NAME)
 	
@@ -66,12 +67,12 @@ $(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
 	@$(CC) $(HPATH) -o $@ -c $^
 
 clean:
-	@echo "$(YELLOW)removing objs...$(WHITE)"
+	@echo "$(YELLOW)removing $(OBJDIR)...$(WHITE)"
 	@$(RM) $(OBJDIR)
 
 fclean: clean
-	@echo "$(YELLOW)removing binary and libs...$(WHITE)"
-	@$(RM) $(NAME) $(LIBA)
+	@echo "$(YELLOW)removing $(NAME)...$(WHITE)"
+	@$(RM) $(NAME)
 
 re: fclean
 	@make all

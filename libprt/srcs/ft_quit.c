@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_quit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/08 20:13:04 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/08 20:15:02 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/02/07 17:17:43 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/02/07 17:23:01 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"libft.h"
+#include "libprt.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+void	ft_quit(int system, char *e_perso)
 {
-	t_list	*next;
-	t_list	*tmp;
-
-	next = lst;
-	while (next != NULL)
-	{
-		tmp = next->next;
-		f(next);
-		next = tmp;
-	}
+	if (system)
+		ft_printf(RED "%s: %s\n" RESET, strerror(system), e_perso);
+	else
+		ft_printf(RED "%s\n" RESET, e_perso);
+	exit(EXIT_FAILURE);
 }

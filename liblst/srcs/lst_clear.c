@@ -12,7 +12,7 @@
 
 #include "liblst.h"
 
-void	lst_clear(t_list **list)
+void	lst_clear(t_list **list, int type)
 {
 	t_list		*current;
 	t_list		*tmp;
@@ -22,10 +22,11 @@ void	lst_clear(t_list **list)
 	current = *list;
 	while (current)
 	{
-		tmp = current;
-		current = current->next;
-		free(tmp->content);
-		free(tmp);
+			tmp = current;
+			current = current->next;
+			if (type != 1 && tmp->content)
+				free(tmp->content);
+			free(tmp);
 	}
 	*list = NULL;
 }

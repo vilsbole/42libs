@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   lst_length.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/08 20:03:54 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/09 15:40:46 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/02/21 19:41:51 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/02/21 19:46:08 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"libft.h"
+#include "liblst.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+int		lst_length(t_list **list)
 {
-	new->next = *alst;
-	*alst = new;
+	int		len;
+	t_list	*current;
+
+	len = 0;
+	current = *list;
+	while (current)
+	{
+		++len;
+		current = current->next;
+	}
+	return (len);
 }

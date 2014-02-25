@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_count.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/20 16:30:01 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/11/28 15:25:25 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/02/12 16:24:02 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/02/12 16:24:28 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<unistd.h>
+#include "libft.h"
 
-void	ft_putstr(char const *str)
+int		ft_count(char *str, char c)
 {
 	int		i;
+	int		count;
 
 	i = 0;
+	count = 0;
 	while (str[i] != '\0')
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
+		if (str[i++] == c)
+			count++;
+	return (count);
 }

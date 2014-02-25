@@ -10,18 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** to do: fix segfault when int is called with %s instead of %d.
+*/
+
 #ifndef LIBPRT_H
 # define LIBPRT_H
 
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include <string.h>
+# include <errno.h>
 
-# define DARK 	"\033[1;32m"
-# define CYAN	"\033[1;36m"
-# define YELLOW	"\033[32m"
-# define RED	"\033[1;31m"
-# define WHITE	"\033[0m"
+# define RESET			"\033[0m"
+# define BLACK			"\033[30m"			/* Black */
+# define RED			"\033[31m"			/* Red */
+# define GREEN			"\033[32m"			/* Green */
+# define YELLOW			"\033[33m"	 		/* Yellow */
+# define BLUE			"\033[34m"			/* Blue */
+# define MAGENTA		"\033[35m"			/* Magenta */
+# define CYAN			"\033[36m"			/* Cyan */
+# define WHITE			"\033[37m"	 		/* White */
+# define BOLDBLACK		"\033[1m\033[30m"	/* Bold Black */
+# define BOLDRED		"\033[1m\033[31m"	/* Bold Red */
+# define BOLDGREEN		"\033[1m\033[32m"	/* Bold Green */
+# define BOLDYELLOW		"\033[1m\033[33m"	/* Bold Yellow */
+# define BOLDBLUE		"\033[1m\033[34m"	/* Bold Blue */
+# define BOLDMAGENTA	"\033[1m\033[35m"	/* Bold Magenta */
+# define BOLDCYAN		"\033[1m\033[36m"	/* Bold Cyan */
+# define BOLDWHITE		"\033[1m\033[37m"	/* Bold White */
 
 /*
 ** SRC1
@@ -65,5 +83,10 @@ int		ft_printvoid_fd(int fd, va_list ap);
 int		ft_printf(const char *s, ...);
 int		ft_printf_fd(int fd, const char *s, ...);
 void	ft_fatal(char *binary);
+
+/*
+** EXTRA
+*/
+void	ft_quit(int system, char *e_perso);
 
 #endif /* ! LIBPRT_H */

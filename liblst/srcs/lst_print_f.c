@@ -21,7 +21,7 @@ void	lst_print_f(t_list *list)
 	current = list;
 	while (current)
 	{
-		printf("%s\n", current->content);
+		ft_printf("%s\n", current->content);
 		current = current->next;
 	}
 }

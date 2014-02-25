@@ -10,46 +10,62 @@
 #                                                                              #
 #******************************************************************************#
 
-# NORME COMPLIANT VARIABLES
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pedantic
-AR = ar
-ARFLAGS = -cvq
-RM = rm
-RMFLAGS = -rf
+NAME = $(LIBA)
+LIBA = 	libgnl.a
 
-NAME = libgnl.a
+LIBS =	-L./ -lgnl
+
+HPATH = -I./includes \
+		-I../libft/includes \
+		-I../libprt/includes
+
 SRCS = gnl.c
-OBJS = $(SRCS:.c=.o)
 
-LIBS = -lgnl -lft
-LPATH = -L./
-HEADERS = gnl.h
-HPATH = -I./ -I../libft/includes
-
-# PERSONNAL VARIABLES
+# STANDARD VARIABLES
+CC = gcc -Wall -Wextra -Werror -g #-pedantic
+AR = ar -cvq
+RM = rm -rf
+SRCDIR = srcs
+OBJDIR = objs
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 NOW := $(shell date +"%c" | tr ' :' '_')
 
+# COLORS
+RESET=		\033[0m
+DARK=		\033[1;32m
+RED=		\033[31m
+GREEN=		\033[32m
+YELLOW=		\033[33m
+BLUE=		\033[34m
+MAGENTA=	\033[35m
+CYAN=		\033[36m
+WHITE=		\033[37m
+BOLDBLACK=	\033[1m\033[30m
+BOLDRED=	\033[1m\033[31m
+BOLDWHITE=	\033[1m\033[37m
+
 # START RULES
-.PHONY: depend clean fclean re build run save
+.PHONY: all depend clean fclean re build run save
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(AR) $(ARFLAGS) $@ $^
+	@echo "$(YELLOW)linking project lib...$(DARK)"
+	@$(AR) $@ $^
 	@ranlib $@
-	@echo $(NAME) built
+	@echo "$(RESET)$(YELLOW)$(LIBA) built$(RESET)\n"
 
-%.o: %.c
-	@$(CC) $(CFLAGS) $(HPATH) -o $@ -c $<
+$(addprefix $(OBJDIR)/, %.o): $(addprefix $(SRCDIR)/, %.c)
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(HPATH) -o $@ -c $^
 
 clean:
-	@$(RM) $(RMFLAGS) $(OBJS)
-	@echo object files removed
+	@echo "$(YELLOW)removing objs...$(RESET)"
+	@$(RM) $(OBJDIR)
 
 fclean: clean
-	@$(RM) $(RMFLAGS) $(NAME) $(EXEC)
-	@echo archive and executable files removed
+	@echo "$(YELLOW)removing binary and libs...$(RESET)"
+	@$(RM) $(NAME) $(LIBA)
 
 re: fclean
 	@make all

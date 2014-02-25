@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_new_node.c                                      :+:      :+:    :+:   */
+/*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evilsbol <evilsbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/16 19:41:48 by evilsbol          #+#    #+#             */
-/*   Updated: 2013/12/16 19:41:52 by evilsbol         ###   ########.fr       */
+/*   Created: 2014/02/25 12:18:20 by evilsbol          #+#    #+#             */
+/*   Updated: 2014/02/25 12:44:23 by evilsbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<stdlib.h>
-#include	"libtr.h"
+#include "libft.h"
 
-t_node		*tr_new_node(unsigned int key)
+int	ft_pow(int x, int n)
 {
-	t_node	*elem;
+	int	a;
 
-	elem = (t_node *)malloc(sizeof(t_node));
-	if (elem)
+	if (n == 0)
+		return (1);
+	else if (n % 2 == 0)
 	{
-		elem->key = key;
-		elem->left = NULL;
-		elem->right = NULL;
-		return (elem);
+		a = ft_pow(x, n / 2);
+		return (a * a);
 	}
-	return (NULL);
+	else
+		return (x * ft_pow(x, n - 1));
 }

@@ -12,10 +12,10 @@
 
 #include "liblst.h"
 
-int		lst_pust(t_list **list, t_list *elem)
+int		lst_push(t_list **list, t_list *elem)
 {
-	if (!(*list && elem))
-		return (0);
+	if (!list || !(*list))
+		*list = elem;
 	else
 	{
 		elem->prev = NULL;

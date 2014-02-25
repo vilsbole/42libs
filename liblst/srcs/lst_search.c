@@ -12,7 +12,7 @@
 
 #include "liblst.h"
 
-char	*lst_search(t_list *list, int key)
+void	**lst_search(t_list *list, int key)
 {
 	t_list	*current;
 
